@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e6217f3ac56fe34897f410ebb3c7a7d, type: 3}
+  m_Name: ResourceAssest
+  m_EditorClassIdentifier: 
+  IdleVideoClip: {fileID: 32900000, guid: 1569d059241bfb448be40e795e3a657c, type: 3}
+  OpeningVideoClip: {fileID: 32900000, guid: 1569d059241bfb448be40e795e3a657c, type: 3}
+  AgreementImg: {fileID: 2800000, guid: 71f32523c2dd12240ad6b25c740fe373, type: 3}
+  StartVideoClip: {fileID: 32900000, guid: 1569d059241bfb448be40e795e3a657c, type: 3}
+  TakePhoto12BGVideo: {fileID: 32900000, guid: 1569d059241bfb448be40e795e3a657c, type: 3}
+  FlowerImg: {fileID: 2800000, guid: 8462f3feb751699458d2d03d7ef7bf6b, type: 3}
+  AICapture: {fileID: 8400000, guid: f4f888cbaa96ad44cafc340f625013dc, type: 2}
+  ShowWebCamDelay: 0
