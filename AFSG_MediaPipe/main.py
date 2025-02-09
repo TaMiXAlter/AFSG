@@ -1,3 +1,4 @@
+from pygrabber.dshow_graph import FilterGraph
 import cv2
 import mediapipe as mp
 import socket
@@ -6,8 +7,21 @@ mp_drawing_styles = mp.solutions.drawing_styles
 mp_pose = mp.solutions.pose                     
 
 mp_modelpath = 'model\pose_landmarker_lite.task'
-#WebCam 需要根據電腦調整
-Camera = cv2.VideoCapture(6)
+#WebCam 
+graph = FilterGraph()
+devices = graph.get_input_devices()
+target_name = "OBS Virtual Camera"
+
+print("all webcam devices :")
+for i, name in enumerate(devices):
+    print(f"Index {i}: {name}")
+    
+index = 0
+if target_name in devices :
+    index = devices.index(target_name)  
+else:
+    print("Cann't get OBS Virtual Camera please check angain and restart")
+Camera = cv2.VideoCapture(index)
 
 # Communication
 IP = "127.0.0.1"
@@ -36,10 +50,7 @@ with mp_pose.Pose(
         
         if not results:
             print("Cannot receive result")
-            break
-        
-      
-        
+            break      
         
         if results.pose_landmarks is not None:
             # 整理 pose landmark
@@ -49,14 +60,6 @@ with mp_pose.Pose(
 
             # 以 UDP 送出資料
             sock.sendto(str.encode(str(pose_landmarks)), (IP, Port))
-            
-              # 顯示pose點 
-            mp_drawing.draw_landmarks(
-                img,
-                results.pose_landmarks,
-                mp_pose.POSE_CONNECTIONS,
-                landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
-            cv2.imshow('MeMePi', img)
         else:
             print("No pose landmarks detected")  # Debug 訊息
 

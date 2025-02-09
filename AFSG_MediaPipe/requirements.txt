@@ -1,0 +1,4 @@
+mediapipe==0.10.20
+tensorflow==2.18.0
+opencv-python==4.11.0.86
+pygrabber==0.2
