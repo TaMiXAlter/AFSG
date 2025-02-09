@@ -19,10 +19,9 @@ public class ResourceAssest : ScriptableObject
     [Header("Start State")]
     public VideoClip StartVideoClip;
     
-    [Header("TakePhoto12 State")]
-    public VideoClip TakePhoto12BGVideo;
+    [Header("TakePhoto State")]
+    public VideoClip TakePhotoBGVideo;
     public Texture2D FlowerImg;
-    
     public RenderTexture AICapture;
-    public int ShowWebCamDelay;
+ 
 }

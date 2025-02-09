@@ -354,6 +354,8 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -analyzer:"D:/Unity/unity22.3/2022.3.11f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"D:/Unity/unity22.3/2022.3.11f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
+"Assets/Scripts/Animation/SaveNudePhoto.cs"
+"Assets/Scripts/Animation/TakePhotoBehavior.cs"
 "Assets/Scripts/Core/MediaPipe/MediaPipeManager.cs"
 "Assets/Scripts/Core/ResourceManagement/ResourceAssest.cs"
 "Assets/Scripts/Core/ResourceManagement/ResourceManager.cs"

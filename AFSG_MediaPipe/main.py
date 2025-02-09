@@ -38,16 +38,8 @@ with mp_pose.Pose(
             print("Cannot receive result")
             break
         
-        # # 顯示pose點 
-        # mp_drawing.draw_landmarks(
-        #     img,
-        #     results.pose_landmarks,
-        #     mp_pose.POSE_CONNECTIONS,
-        #     landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
-        # cv2.imshow('MeMePi', img)
-        # 關閉視窗停止
-        # if cv2.getWindowProperty('MeMePi', cv2.WND_PROP_VISIBLE) < 1:
-        #     break
+      
+        
         
         if results.pose_landmarks is not None:
             # 整理 pose landmark
@@ -57,6 +49,14 @@ with mp_pose.Pose(
 
             # 以 UDP 送出資料
             sock.sendto(str.encode(str(pose_landmarks)), (IP, Port))
+            
+              # 顯示pose點 
+            mp_drawing.draw_landmarks(
+                img,
+                results.pose_landmarks,
+                mp_pose.POSE_CONNECTIONS,
+                landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
+            cv2.imshow('MeMePi', img)
         else:
             print("No pose landmarks detected")  # Debug 訊息
 

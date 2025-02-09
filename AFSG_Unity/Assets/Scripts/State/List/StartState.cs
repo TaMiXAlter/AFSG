@@ -15,5 +15,12 @@ public class StartState : StateBase
         Debug.Log("Start");
         VideoClip StartVideoClip = ResourceManager.Instance.GetResource().StartVideoClip;
         VideoManager.Instance.PlayVideo(StartVideoClip);
+        VideoManager.Instance.BindOnVideoEnd(OnVideoEnd);
+    }
+
+    private void OnVideoEnd(VideoPlayer source)
+    {
+        VideoManager.Instance.UnBindOnVideoEnd(OnVideoEnd);
+        StateManagerRef.NextScene();
     }
 }

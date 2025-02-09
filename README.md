@@ -35,27 +35,23 @@ classDiagram
         Video: 開場影片
         Mediapipe:抓取身體參數造成場景變化()
     }
-    class TakePhoto12{
+    class TakePhoto{
         Video: 背景影片
         Image: 小花
         
         WebCam:顯示在畫面上()
-    }
-    class TakeAIPhoto{
-        Video: 背景影片
-        Image: 小花
-        
         TD: 顯示在畫面上()
         Unity: 儲存最後圖片(裸照)
-        Server: 生成"裸照"API(圖片網址)
+        Unity: 生成"裸照"API(圖片網址)
     }
+
     class Eyes{
         Image: 眼球圖片和眼球圖片 要分開
         Mediapipe: 追蹤使用者位置
     }
     class ShowNude{
-        Video: 背景圖片
-        unity: 放"裸照"出現消失
+        Video: 背景影片
+        unity: 放"裸照"出現消失()
     }
     class out{
         Video: 影片
@@ -67,9 +63,8 @@ classDiagram
     Idle -->Opening
     Opening-->AgreeMent
     AgreeMent --> Start
-    Start --> TakePhoto12
-    TakePhoto12-->TakeAIPhoto
-    TakeAIPhoto --> Eyes
+    Start --> TakePhoto
+    TakePhoto--> Eyes
     Eyes --> ShowNude
     ShowNude --> out
     out --> QRCode
