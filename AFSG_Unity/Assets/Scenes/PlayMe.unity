@@ -990,6 +990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _resourceAssest: {fileID: 11400000, guid: acf25655ca15ce44cb35d1902708e557, type: 2}
+  ImageDataPathTemp: 
 --- !u!4 &1115732168
 Transform:
   m_ObjectHideFlags: 0

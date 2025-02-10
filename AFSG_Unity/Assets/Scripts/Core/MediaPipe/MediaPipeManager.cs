@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 
-struct LandMark
+public struct LandMark
 {
     public LandMark(float _x, float _y, float _z)
     {
@@ -41,6 +41,7 @@ public class MediaPipeManager : MonoBehaviour
     private UdpClient client;
     private int port = 6500;
     public event Action OnHandsRaise;
+    public LandMark[] landMarks = new LandMark[]{};
     private void Awake()
     {
         if (MediaPipeManager.Instance != this) Destroy(this);
@@ -54,17 +55,15 @@ public class MediaPipeManager : MonoBehaviour
         String udpData = "";
         ReceiveData(ref udpData);
         
-        if (OnHandsRaise == null) return;
-        
         if (udpData == "")
         {
             Debug.LogError("Nodata");
             return;
         }
         
-        LandMark[] landMarks = SortData(udpData);
+        landMarks = SortData(udpData);
         
-        if (isHandsRaise(landMarks))
+        if (isHandsRaise(landMarks) && OnHandsRaise != null)
         {
             Debug.Log("Raise");
             OnHandsRaise.Invoke();

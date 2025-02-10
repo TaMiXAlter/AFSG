@@ -46,10 +46,12 @@ public class TakePhotoState : StateBase
         texture.ReadPixels(new Rect(0, 0, AIRenderer.texture.width, AIRenderer.texture.height), 0, 0);
 
         byte[] bytes = texture.EncodeToJPG(90);
-        string savePath =
-            Path.Combine(Application.persistentDataPath, DateTime.Now.ToString() + ".jpg");
-        File.WriteAllBytes(savePath, bytes);
-        
-        Debug.Log($"已儲存到: {savePath}");
+        ResourceManager.Instance.SaveImage(bytes);
+    }
+    
+    public void NextScene()
+    {
+        webCamTexture.Stop();
+        StateManagerRef.NextScene();
     }
 }

@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: ResourceAssest
   m_EditorClassIdentifier: 
   IdleVideoClip: {fileID: 32900000, guid: 1569d059241bfb448be40e795e3a657c, type: 3}
-  OpeningVideoClip: {fileID: 32900000, guid: 1569d059241bfb448be40e795e3a657c, type: 3}
+  OpeningVideoClip: {fileID: 32900000, guid: 09f681f277b19f9439721dd08cdce4ef, type: 3}
   AgreementImg: {fileID: 2800000, guid: 71f32523c2dd12240ad6b25c740fe373, type: 3}
   StartVideoClip: {fileID: 32900000, guid: 1569d059241bfb448be40e795e3a657c, type: 3}
-  TakePhoto12BGVideo: {fileID: 32900000, guid: 1569d059241bfb448be40e795e3a657c, type: 3}
+  TakePhotoBGVideo: {fileID: 0}
   FlowerImg: {fileID: 2800000, guid: 8462f3feb751699458d2d03d7ef7bf6b, type: 3}
   AICapture: {fileID: 8400000, guid: f4f888cbaa96ad44cafc340f625013dc, type: 2}
-  ShowWebCamDelay: 0

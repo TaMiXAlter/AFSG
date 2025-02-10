@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
@@ -23,10 +24,21 @@ public class ResourceManager : MonoBehaviour
 
     #endregion
    
-    public ResourceAssest _resourceAssest;
-    
+    public ResourceAssest _resourceAssest; 
+    private string SaveImagePath = Application.dataPath + "/Resources/SaveImage";
+
+    public string ImageDataPathTemp = "";
     public ResourceAssest GetResource()
     {
         return _resourceAssest;
+    }
+
+    public void SaveImage(byte[] data)
+    {
+        ImageDataPathTemp =
+            Path.Combine(SaveImagePath, DateTime.Now.ToString() + ".jpg");
+        File.WriteAllBytes(ImageDataPathTemp, data);
+        
+        Debug.Log($"已儲存到: {ImageDataPathTemp}");
     }
 }

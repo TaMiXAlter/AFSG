@@ -4,30 +4,12 @@ namespace Animation
 {
     public class EndState : StateMachineBehaviour
     {
-        public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo,
-            int layerIndex)
+        public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            
+            base.OnStateEnter(animator, stateInfo, layerIndex);
+            animator.GetComponent<TakePhotoState>().NextScene();
         }
-
-        public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo,
-            int layerIndex)
-        {
-        }
-
-        public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo,
-            int layerIndex)
-        {
-        }
-
-        public override void OnStateMove(Animator animator, AnimatorStateInfo stateInfo,
-            int layerIndex)
-        {
-        }
-
-        public override void OnStateIK(Animator animator, AnimatorStateInfo stateInfo,
-            int layerIndex)
-        {
-        }
+        
+        
     }
 }
