@@ -8,18 +8,6 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 
-public struct LandMark
-{
-    public LandMark(float _x, float _y, float _z)
-    {
-        x = _x;
-        y = _y;
-        z = _z;
-    }
-    public float x;
-    public float y;
-    public float z;
-}
 public class MediaPipeManager : MonoBehaviour
 {
     #region Singleton
@@ -41,15 +29,27 @@ public class MediaPipeManager : MonoBehaviour
     private UdpClient client;
     private int port = 6500;
     public event Action OnHandsRaise;
-    public LandMark[] landMarks = new LandMark[]{};
+    
+    public event Action OnHandsWaveRight;
+    public event Action OnHandsWaveLeft;
+    
+    public Vector3[] landMarks = new Vector3[]{};
+
+    [Header("HandWave Para")] 
+    private float rightHandWaveDelta = 0.0f;
+    private float leftHandWaveDelta = 0.0f;
+    
+    
+    private Queue<Vector3> rightHandTemp =new Queue<Vector3>();
+    private Queue<Vector3> leftHandTemp =new Queue<Vector3>();
+    
+    [SerializeField] private int HandTempLength = 10;
+    [SerializeField] private float HandDeltaTrigger = 3.0f;
     private void Awake()
     {
         if (MediaPipeManager.Instance != this) Destroy(this);
         client = new UdpClient(port);
-        
     }
-
-
     private void Update()
     {
         String udpData = "";
@@ -63,13 +63,26 @@ public class MediaPipeManager : MonoBehaviour
         
         landMarks = SortData(udpData);
         
+        //hand raise
         if (isHandsRaise(landMarks) && OnHandsRaise != null)
         {
-            Debug.Log("Raise");
             OnHandsRaise.Invoke();
             //make hand raise do once 
             OnHandsRaise = null;
         }
+        
+        //hand wave
+        if (OnHandsWaveRight == null && OnHandsWaveLeft == null) return;
+        if (!TryGetHandsWaveDelta(landMarks))return;
+        
+        if (TryTriggerHandsWave())
+        {
+            rightHandTemp.Clear();
+            leftHandTemp.Clear();
+            rightHandWaveDelta = 0.0f;
+            leftHandWaveDelta = 0.0f;
+        }
+
     }
 
     private void ReceiveData(ref String output)
@@ -86,28 +99,47 @@ public class MediaPipeManager : MonoBehaviour
         }
     }
 
-    private LandMark[] SortData( String input)
+    private Vector3[] SortData( String input)
     {
         input = input.Remove(0, 1);
         input = input.Remove(input.Length - 1, 1);
         
         String[] dataSplit = input.Split(',');
-        var output = new LandMark[33];
+        var output = new Vector3[33];
         for (int i = 0; i < 33; i++)
         {
             float x = float.Parse(dataSplit[i * 3]);
             float y = float.Parse(dataSplit[i * 3 + 1]);
             float z = float.Parse(dataSplit[i * 3 + 2]);
-            LandMark temp = new LandMark(x,y,z);
+            Vector3 temp = new Vector3(x,y,z);
             output[i] = temp;
         }
 
         return output;
     }
-    
-    
+
+    private bool TryGetHandsWaveDelta(Vector3[] input)
+    {
+        Vector3 nowRight,nowLeft;
+        if (input[15] == Vector3.zero || input[16] == Vector3.zero) return false;
+        
+        nowRight = input[16];
+        nowLeft = input[15];
+        rightHandTemp.Enqueue(nowRight);
+        leftHandTemp.Enqueue(nowLeft);
+        
+        if (rightHandTemp.Count < HandTempLength || leftHandTemp.Count < HandTempLength) return true;
+        
+        Vector3 privRight,privLeft;
+        privRight = rightHandTemp.Dequeue();
+        privLeft = leftHandTemp.Dequeue();
+        rightHandWaveDelta = nowRight.x - privRight.x;
+        leftHandWaveDelta = nowLeft.x - privLeft.x;
+        
+        return true;
+    }
     // 判斷器
-    bool isHandsRaise(LandMark[] input)
+    bool isHandsRaise(Vector3[] input)
     {
         if (input[15].y>input[13].y && input[13].y > input[11].y &&
         input[16].y>input[14].y && input[14].y > input[12].y)
@@ -115,6 +147,26 @@ public class MediaPipeManager : MonoBehaviour
             return true;
         }
         
+        return false;
+    }
+
+    bool TryTriggerHandsWave()
+    {
+        if (rightHandWaveDelta > HandDeltaTrigger || leftHandWaveDelta > HandDeltaTrigger)
+        {
+            Debug.Log("Right: " + rightHandWaveDelta + " Left: " + leftHandWaveDelta);
+            OnHandsWaveLeft?.Invoke();
+            return true;
+            
+        }
+
+        if (rightHandWaveDelta < -HandDeltaTrigger || leftHandWaveDelta < -HandDeltaTrigger)
+        {
+            Debug.Log("Right: " + rightHandWaveDelta + " Left: " + leftHandWaveDelta);
+            OnHandsWaveRight?.Invoke();
+            return true;
+        }
+
         return false;
     }
 }
