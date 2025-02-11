@@ -635,6 +635,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3f32b7c677b94749bbc8ee8814551d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  landMarks: []
+  HandTempLength: 10
+  HandDeltaTrigger: 3
 --- !u!4 &726474061
 Transform:
   m_ObjectHideFlags: 0
@@ -818,6 +821,7 @@ GameObject:
   - component: {fileID: 979571191}
   - component: {fileID: 979571192}
   - component: {fileID: 979571193}
+  - component: {fileID: 979571194}
   m_Layer: 5
   m_Name: TakePhoto
   m_TagString: Untagged
@@ -888,6 +892,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &979571194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979571188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b5a85798a30bec4e8ab0ad0dd2bae88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Flower: {fileID: 2806509495209624535, guid: a3150a07c3932df4e98be396e2e3a9ac, type: 3}
+  isSpawningFlower: 0
+  flowerSpawnInterval: 0.3
 --- !u!1 &1052350493
 GameObject:
   m_ObjectHideFlags: 0
@@ -1531,10 +1550,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stateList:
-  - {fileID: 1375816551}
-  - {fileID: 1137916539}
-  - {fileID: 891845618}
-  - {fileID: 1872147507}
   - {fileID: 979571192}
 --- !u!4 &1724002072
 Transform:
