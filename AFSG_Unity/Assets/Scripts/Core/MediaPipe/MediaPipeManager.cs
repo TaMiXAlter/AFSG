@@ -32,13 +32,14 @@ public class MediaPipeManager : MonoBehaviour
     
     public event Action OnHandsWaveRight;
     public event Action OnHandsWaveLeft;
+
+    public event Action<float,float> OnBodyMove;
     
     public Vector3[] landMarks = new Vector3[]{};
 
     [Header("HandWave Para")] 
     private float rightHandWaveDelta = 0.0f;
     private float leftHandWaveDelta = 0.0f;
-    
     
     private Queue<Vector3> rightHandTemp =new Queue<Vector3>();
     private Queue<Vector3> leftHandTemp =new Queue<Vector3>();
@@ -72,16 +73,23 @@ public class MediaPipeManager : MonoBehaviour
         }
         
         //hand wave
-        if (OnHandsWaveRight == null && OnHandsWaveLeft == null) return;
-        if (!TryGetHandsWaveDelta(landMarks))return;
-        
-        if (TryTriggerHandsWave())
+        if (OnHandsWaveRight != null || OnHandsWaveLeft != null)
         {
-            rightHandTemp.Clear();
-            leftHandTemp.Clear();
-            rightHandWaveDelta = 0.0f;
-            leftHandWaveDelta = 0.0f;
+            if (TryGetHandsWaveDelta(landMarks))
+            {
+                if (TryTriggerHandsWave())
+                {
+                    rightHandTemp.Clear();
+                    leftHandTemp.Clear();
+                    rightHandWaveDelta = 0.0f;
+                    leftHandWaveDelta = 0.0f;
+                }
+            }
         }
+        // follow body
+        if (OnBodyMove != null) OnBodyMove.Invoke(landMarks[0].x , landMarks[0].y);
+        
+       
 
     }
 

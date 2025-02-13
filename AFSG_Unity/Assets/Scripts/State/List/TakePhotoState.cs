@@ -41,12 +41,27 @@ public class TakePhotoState : StateBase
 
     public void TrySaveAIPhoto()
     {
-        Texture2D texture =
-            new Texture2D(AIRenderer.texture.width, AIRenderer.texture.height, TextureFormat.RGB24, false);
-        texture.ReadPixels(new Rect(0, 0, AIRenderer.texture.width, AIRenderer.texture.height), 0, 0);
+       
+        RenderTexture renderTexture = AIRenderer.texture as RenderTexture;
+        if (renderTexture == null)
+        {
+            Debug.LogError("AIRenderer.texture 不是 RenderTexture，無法讀取像素！");
+            return;
+        }
+        
+        RenderTexture.active = renderTexture;
 
+        Texture2D texture = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGB24, false);
+        texture.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
+        texture.Apply();
+        
+        RenderTexture.active = null;
+        
         byte[] bytes = texture.EncodeToJPG(90);
-        ResourceManager.Instance.SaveImage(bytes);
+        ResourceManager.Instance.SaveImage(bytes, texture);
+
+        Debug.Log("圖片已成功儲存！");
+        ResourceManager.Instance.SaveImage(bytes,texture);
     }
     
     public void NextScene()

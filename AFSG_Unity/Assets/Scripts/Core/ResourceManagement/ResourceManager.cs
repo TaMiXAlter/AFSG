@@ -23,7 +23,9 @@ public class ResourceManager : MonoBehaviour
     }
 
     #endregion
-   
+
+    [Header("Util")] public Texture2D NudeImg;
+    
     public ResourceAssest _resourceAssest; 
     private string SaveImagePath = Application.dataPath + "/Resources/SaveImage";
 
@@ -33,12 +35,17 @@ public class ResourceManager : MonoBehaviour
         return _resourceAssest;
     }
 
-    public void SaveImage(byte[] data)
+    public void SaveImage(byte[] data ,Texture2D textureSave)
     {
+        DateTime currentDateTime = DateTime.Now;
+        string formattedDateTime = currentDateTime.ToString("yyyyMMdd_HHmmss");
+        
         ImageDataPathTemp =
-            Path.Combine(SaveImagePath, DateTime.Now.ToString() + ".jpg");
+            Path.Combine(SaveImagePath, formattedDateTime + ".jpg");
         File.WriteAllBytes(ImageDataPathTemp, data);
         
         Debug.Log($"已儲存到: {ImageDataPathTemp}");
+        
+        NudeImg = textureSave;
     }
 }

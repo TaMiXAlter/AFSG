@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Dev/FlowrTest.unity
+- path: Assets/Scenes/PlayMe.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

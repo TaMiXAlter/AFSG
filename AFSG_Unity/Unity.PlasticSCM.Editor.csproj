@@ -226,8 +226,8 @@
      <Compile Include="Library\PackageCache\com.unity.collab-proxy@2.6.0\Editor\Views\ConfirmContinueWithPendingChangesDialog.cs" />
      <Compile Include="Library\PackageCache\com.unity.collab-proxy@2.6.0\Editor\Hub\Operations\CreateWorkspace.cs" />
      <Compile Include="Library\PackageCache\com.unity.collab-proxy@2.6.0\Editor\Views\PendingChanges\DrawCommentTextArea.cs" />
-     <Compile Include="Library\PackageCache\com.unity.collab-proxy@2.6.0\Editor\Views\Merge\Gluon\IncomingChangesViewMenu.cs" />
      <Compile Include="Library\PackageCache\com.unity.collab-proxy@2.6.0\Editor\UI\EditorProgressBar.cs" />
+     <Compile Include="Library\PackageCache\com.unity.collab-proxy@2.6.0\Editor\Views\Merge\Gluon\IncomingChangesViewMenu.cs" />
      <Compile Include="Library\PackageCache\com.unity.collab-proxy@2.6.0\Editor\Views\PendingChanges\PendingMergeLinks\MergeLinkListViewItem.cs" />
      <Compile Include="Library\PackageCache\com.unity.collab-proxy@2.6.0\Editor\Views\PendingChanges\PendingChangesTreeView.cs" />
      <Compile Include="Library\PackageCache\com.unity.collab-proxy@2.6.0\Editor\Configuration\CloudEdition\Welcome\AutoLogin.cs" />

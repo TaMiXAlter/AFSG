@@ -56,4 +56,5 @@ public class VideoManager : MonoBehaviour
     {
         _videoPlayer.loopPointReached -= action;
     }
+    
 }

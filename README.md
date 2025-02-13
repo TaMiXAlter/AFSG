@@ -12,7 +12,7 @@ https://www.python.org/downloads/windows/
 
 照著這個教學走
 https://steam.oxxostudio.tw/category/python/ai/ai-mediapipe-2023.html
-
+!!! 注意 虛擬環境的名稱需要叫做 "venv" 否則無法使用 bat 檔開啟
 額外下載
 ``` sh
 pip install pygrabber
@@ -57,7 +57,6 @@ classDiagram
         Mediapipe:抓取身體參數造成場景變化()
     }
     class TakePhoto{
-        Video: 背景影片
         Image: 小花
         
         WebCam:顯示在畫面上()
@@ -67,14 +66,14 @@ classDiagram
     }
 
     class Eyes{
-        Image: 眼球圖片和眼球圖片 要分開
-        Mediapipe: 追蹤使用者位置
+        Image(): 眼球圖片和眼球圖片 要分開
+        Mediapipe(): 追蹤使用者位置
     }
-    class ShowNude{
+    class Monitor{
         Video: 背景影片
         unity: 放"裸照"出現消失()
     }
-    class out{
+    class outro{
         Video: 影片
     }
     class QRCode{
@@ -86,7 +85,7 @@ classDiagram
     AgreeMent --> Start
     Start --> TakePhoto
     TakePhoto--> Eyes
-    Eyes --> ShowNude
-    ShowNude --> out
-    out --> QRCode
+    Eyes --> Monitor
+    Monitor --> outro
+    outro --> QRCode
 ```
